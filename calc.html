@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <title>Calculadora Web</title>
+        <link rel="stylesheet" href="calc.css">
+        <link href="https://fonts.googleapis.com/css?family=Chathura" rel="stylesheet">
+    </head>
+    <body>
+        <div id="p">
+            <div id="dis">
+                <input type="text" id="h" disabled="" value="">
+                <input type="text" id="d" disabled="" value="0">
+            </div>
+            <div id="m">
+                <input type="button" value="C" id="c">
+                <input type="button" value="CE" id="ce">
+                <input type="button" value="CM" id="cm">
+                <input type="button" value="M1" id="m1">                
+                <button id="xy">X<span><sup>Y</sup></span></button>
+                <input type="button" value="(" id="ap">
+                <input type="button" value=")" id="fp">
+                <input type="button" value="<-" id="r">
+            </div>
+            <div id="n">
+                <input type="button" value="7" id="7">
+                <input type="button" value="8" id="8">
+                <input type="button" value="9" id="9">
+                <input type="button" value="4" id="4">
+                <input type="button" value="5" id="5">
+                <input type="button" value="6" id="6">
+                <input type="button" value="1" id="1">
+                <input type="button" value="2" id="2">
+                <input type="button" value="3" id="3">
+                <input type="button" value="0" id="0">
+                <input type="button" value="." id="virgula">      
+            </div>
+            <div id="e">
+                <input type="button" value="=" id="igual">
+            </div>
+            <div id="o">
+                <input type="button" value="+" id="mais">
+                <input type="button" value="-" id="menos">
+                <input type="button" value="*" id="vezes">
+                <input type="button" value="/" id="divide">   
+            </div>
+        </div>
+        <script src="jquery-3.3.1.min.js"></script>
+        <script> 
+            var d='', m1=0, m2=0;
+            var x='', y='';
+            
+            $('#xy').on('click', function(e){if(x==''){
+                                            x=parseFloat($('#d').val());
+                                            d='';
+                                            $('#d').val(0);
+                                            $('button').css('color', 'red');
+                                            $('span').css('color', 'black');
+                                            $('')
+                                            }else{
+                                            y=parseFloat($('#d').val());
+                                            $('#d').val(x**y);
+                                            x=0;
+                                            y=0;
+                                            }
+                                           });
+            
+            $('#c').on('click', function(e){d='';
+                                            $('#d').val(0);
+                                            $('#virgula').removeAttr('disabled');
+                                           });
+            
+            $('#ce').on('click', function(e){d='';
+                                            $('#d').val(0);
+                                            $('#h').val('');
+                                            $('#virgula').removeAttr('disabled');
+                                             x='';
+                                             y='';
+                                             $('button').css('color', 'black');
+                                           });
+            
+            $('#m1').on('click',function(e){if(m1==0){
+                                                m1=$('#d').val();
+                                           }
+                                            $('#d').val(m1);
+                                           });
+            
+            $('#ap').on('click', function(e){if($('#mais')[0].hasAttribute('disabled')){
+                                                $('#h').val($('#h').val()+e.target.value);
+                                                d='';
+                                                $('#d').val(d);
+                                             }
+                                            });
+            
+            $('#fp').on('click', function(e){$('#h').val($('#h').val()+$('#d').val()+e.target.value);
+                                             d='';
+                                             $('#d').val(d);
+                                            });
+            
+            $('#r').on('click', function(e){$('#d').val($('#d').val().slice(0, -1));});
+            
+            $('#cm').on('click',function(e){m1=0;});
+            
+            $('#n').on('click','input', function(e){if(e.target.value == "."){
+                                                                if($('#d').val()=='0'){
+                                                                    d='0';
+                                                                    $('#virgula').attr('disabled','');
+                                                                }else{
+                                                                    $('#virgula').attr('disabled','');
+                                                                }
+                                                            }
+                                                           $('#o').children().removeAttr('disabled');
+                                                           d+=e.target.value;
+                                                           $('#d').val(d);
+                                                          });
+            
+            $('#o').on('click', 'input', function(e){$('#h').val($('#h').val()+$('#d').val());
+                                                     $('#h').val($('#h').val()+e.target.value);
+                                                     $('#virgula').removeAttr('disabled');
+                                                     $('#o').children().attr('disabled','');
+                                                     d='';
+                                                    });
+            
+            $('#igual').on('click', function(e){$('#h').val($('#h').val()+$('#d').val());
+                                                $('#d').val(eval($('#h').val()));
+                                                $('#h').val($('#h').val()+e.target.value);
+                                               });
+        </script>
+    </body>
+</html>
