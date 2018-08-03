@@ -17,7 +17,6 @@ xhr.onload = function(e){
             c.append(f);
             t.append(getNodeValue(block[i], 'text'));
             c.append(t);
-            //c.css('float', 'left');
             
             $('#ajax').append(c);
         }
