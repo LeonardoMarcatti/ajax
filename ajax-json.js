@@ -6,10 +6,15 @@ xhr.onload = function(e){
         
         var c='';
         
-        for(var i=0; i<responseObject.events.length; i++){
+        for(var i=0; i<responseObject.block.length; i++){
             c+='<div>';
-            c+='<img src=' + responseObject.events[i].image + '>';
-            c+='<p>'+ responseObject.events[i].text + '</p>';
+            c+='<img src=' + responseObject.block[i].image + '>';
+            c+='<p>'+ responseObject.block[i].text + '</p>';
+            c+='</div>';
         };
+        $('#ajax').html(c);
     };
-}
+};
+
+xhr.open('GET', 'data/json.json', true);
+xhr.send(null); 
