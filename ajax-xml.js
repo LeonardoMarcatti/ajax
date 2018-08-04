@@ -10,15 +10,13 @@ xhr.onload = function(e){
             c = $('<div>');
             f = $('<img>');
             t = $('<p>');
-            f.attr('src', getNodeValue(block[i], 'image'));
-            f.attr('title', getNodeValue(block[i], 'text'));
-            f.css('width', '300px').css('height', '200px');
-            f.css('boxShadow', '0px 0px 5px black').css('marginBottom', '5px');
+            f.attr('src', getNodeValue(block[i], 'image')).attr('title', getNodeValue(block[i], 'text'));
+            f.css('width', '300px').css('height', '200px').css('marginBottom', '-10px').css('boxShadow', '0px 0px 5px black').css('clear','left').css('marginTop', '20px');
             c.append(f);
             t.append(getNodeValue(block[i], 'text'));
             c.append(t);
-            
-            $('#ajax').append(c);
+            $('#ajax').append(f);
+            $('#ajax').append(t);
         }
         function getNodeValue(obj, tag) {
             return obj.getElementsByTagName(tag)[0].firstChild.nodeValue;
